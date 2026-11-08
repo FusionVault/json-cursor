@@ -1,0 +1,6 @@
+parser,read_with,-237462374673276894279832749832423479823246327846,1e400,0.1000000000000000055511151231257827
+json-cursor,number(),the exact text,the exact text,the exact text
+jiter,known_number,Int(BigInt(-237462374673276894279832749832423479823246327846)),Float(inf),Float(0.1)
+serde_json,Value,-2.3746237467327687e+47,error: number out of range at line 1 column 5,0.1
+sonic-rs,Value,-2.374623746732769e+47,"error: Float number must be finite, not be Infinity or NaN at line 1 column 5",0.1
+simd-json,owned::to_value,error: InvalidNumber at character 20 ('7'),error: InvalidNumber at character 0 ('1'),0.1

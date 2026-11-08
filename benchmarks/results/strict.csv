@@ -1,0 +1,27 @@
+case,rfc_8259,json-cursor,jiter,serde_json,sonic-rs,simd-json,serde_json Value
+an object,accept,accepts,accepts,accepts,accepts,accepts,accepts
+-0 and 1E+2,accept,accepts,accepts,accepts,accepts,accepts,accepts
+1e400 past a double's range,accept,accepts,accepts,accepts,accepts,refuses,refuses
+a 30-digit integer,accept,accepts,accepts,accepts,accepts,refuses,accepts
+a repeated key,accept,accepts,accepts,accepts,accepts,accepts,accepts
+a trailing comma in an array,refuse,refuses,refuses,refuses,refuses,refuses,refuses
+a trailing comma in an object,refuse,refuses,refuses,refuses,refuses,refuses,refuses
+two commas,refuse,refuses,refuses,refuses,refuses,refuses,refuses
+a missing comma,refuse,refuses,refuses,refuses,refuses,refuses,refuses
+1-2,refuse,refuses,refuses,refuses,refuses,refuses,refuses
+a leading zero,refuse,refuses,refuses,refuses,refuses,refuses,refuses
+NaN,refuse,refuses,refuses,refuses,refuses,refuses,refuses
+a lone minus,refuse,refuses,refuses,refuses,refuses,refuses,refuses
+a raw control character,refuse,refuses,refuses,refuses,refuses,refuses,refuses
+trailing bytes,refuse,refuses,refuses,refuses,refuses,refuses,refuses
+an empty input,refuse,refuses,refuses,refuses,refuses,refuses,refuses
+a bad escape,refuse,refuses,refuses,refuses,refuses,refuses,refuses
+bad UTF-8 in a string,refuse,refuses,accepts,accepts,refuses,refuses,refuses
+bad UTF-8 in a key,refuse,refuses,accepts,accepts,refuses,refuses,refuses
+bad UTF-8 in a nested string,refuse,refuses,accepts,accepts,refuses,refuses,refuses
+an overlong UTF-8 sequence,refuse,refuses,accepts,accepts,refuses,refuses,refuses
+a surrogate encoded as UTF-8,refuse,refuses,accepts,accepts,refuses,refuses,refuses
+a byte-order mark,either,refuses,refuses,refuses,refuses,refuses,refuses
+a lone surrogate escape,either,refuses,refuses,accepts,accepts,refuses,refuses
+300 nested arrays,either,refuses,refuses,accepts,accepts,accepts,refuses
+a million nested arrays under one key,either,refuses,refuses,accepts,crashes,refuses,refuses

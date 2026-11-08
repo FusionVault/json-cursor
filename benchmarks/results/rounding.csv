@@ -1,0 +1,6 @@
+parser,read_with,nearest_double,another_double
+json-cursor,number()?.as_f64(),1000000,0
+jiter,next_float,1000000,0
+serde_json,from_str::<f64>,680093,319907
+sonic-rs,from_str::<f64>,1000000,0
+simd-json,serde::from_slice::<f64>,1000000,0

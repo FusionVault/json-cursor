@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="364" viewBox="0 0 760 364" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" role="img" aria-label="Strictness: json-cursor gives RFC 8259's answer on all 26 cases; jiter does not on 5; serde_json does not on 5; simd-json does not on 2; sonic-rs does not on 1">
+<title>Strictness: json-cursor gives RFC 8259's answer on all 26 cases; jiter does not on 5; serde_json does not on 5; simd-json does not on 2; sonic-rs does not on 1</title>
+<rect x="0.5" y="0.5" width="759" height="363" rx="10" fill="#fcfcfb" stroke="#e1e0d9"/>
+<text x="28.0" y="40.0" font-size="21" font-weight="600" fill="#0b0b0b" text-anchor="start">Strictness</text>
+<text x="28.0" y="66.0" font-size="15" font-weight="400" fill="#52514e" text-anchor="start">A check is RFC 8259's answer. A cross is not, or a crash.</text>
+<rect x="264.0" y="96.0" width="93.6" height="198.0" rx="6" fill="#e7eff7"/>
+<text x="310.8" y="121.0" font-size="15" font-weight="600" fill="#0b0b0b" text-anchor="middle">json-cursor</text>
+<text x="404.4" y="121.0" font-size="15" font-weight="500" fill="#0b0b0b" text-anchor="middle">jiter</text>
+<text x="498.0" y="121.0" font-size="15" font-weight="500" fill="#0b0b0b" text-anchor="middle">serde_json</text>
+<text x="591.6" y="121.0" font-size="15" font-weight="500" fill="#0b0b0b" text-anchor="middle">simd-json</text>
+<text x="685.2" y="121.0" font-size="15" font-weight="500" fill="#0b0b0b" text-anchor="middle">sonic-rs</text>
+<line x1="28" y1="134.0" x2="732" y2="134.0" stroke="#e9e8e2"/>
+<text x="28.0" y="159.0" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">Bad UTF-8 in a string</text>
+<circle cx="280.4" cy="154.0" r="8" fill="#0ca30c"/>
+<path d="M276.8,154.2 L279.4,156.9 L284.2,151.1" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="294.4" y="159.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">refuses</text>
+<circle cx="374.0" cy="154.0" r="8" fill="#d03b3b"/>
+<path d="M371.1,151.1 L376.9,156.9 M376.9,151.1 L371.1,156.9" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="388.0" y="159.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">accepts</text>
+<circle cx="467.6" cy="154.0" r="8" fill="#d03b3b"/>
+<path d="M464.7,151.1 L470.5,156.9 M470.5,151.1 L464.7,156.9" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="481.6" y="159.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">accepts</text>
+<circle cx="561.2" cy="154.0" r="8" fill="#0ca30c"/>
+<path d="M557.6,154.2 L560.2,156.9 L565.0,151.1" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="575.2" y="159.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">refuses</text>
+<circle cx="654.8" cy="154.0" r="8" fill="#0ca30c"/>
+<path d="M651.2,154.2 L653.8,156.9 L658.6,151.1" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="668.8" y="159.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">refuses</text>
+<line x1="28" y1="174.0" x2="732" y2="174.0" stroke="#e9e8e2"/>
+<text x="28.0" y="199.0" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">1e400, past a double</text>
+<circle cx="280.4" cy="194.0" r="8" fill="#0ca30c"/>
+<path d="M276.8,194.2 L279.4,196.9 L284.2,191.1" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="294.4" y="199.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">accepts</text>
+<circle cx="374.0" cy="194.0" r="8" fill="#0ca30c"/>
+<path d="M370.4,194.2 L373.0,196.9 L377.8,191.1" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="388.0" y="199.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">accepts</text>
+<circle cx="467.6" cy="194.0" r="8" fill="#0ca30c"/>
+<path d="M464.0,194.2 L466.6,196.9 L471.4,191.1" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="481.6" y="199.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">accepts</text>
+<circle cx="561.2" cy="194.0" r="8" fill="#d03b3b"/>
+<path d="M558.3,191.1 L564.1,196.9 M564.1,191.1 L558.3,196.9" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="575.2" y="199.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">refuses</text>
+<circle cx="654.8" cy="194.0" r="8" fill="#0ca30c"/>
+<path d="M651.2,194.2 L653.8,196.9 L658.6,191.1" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="668.8" y="199.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">accepts</text>
+<line x1="28" y1="214.0" x2="732" y2="214.0" stroke="#e9e8e2"/>
+<text x="28.0" y="239.0" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">A 30-digit integer</text>
+<circle cx="280.4" cy="234.0" r="8" fill="#0ca30c"/>
+<path d="M276.8,234.2 L279.4,236.9 L284.2,231.1" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="294.4" y="239.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">accepts</text>
+<circle cx="374.0" cy="234.0" r="8" fill="#0ca30c"/>
+<path d="M370.4,234.2 L373.0,236.9 L377.8,231.1" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="388.0" y="239.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">accepts</text>
+<circle cx="467.6" cy="234.0" r="8" fill="#0ca30c"/>
+<path d="M464.0,234.2 L466.6,236.9 L471.4,231.1" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="481.6" y="239.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">accepts</text>
+<circle cx="561.2" cy="234.0" r="8" fill="#d03b3b"/>
+<path d="M558.3,231.1 L564.1,236.9 M564.1,231.1 L558.3,236.9" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="575.2" y="239.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">refuses</text>
+<circle cx="654.8" cy="234.0" r="8" fill="#0ca30c"/>
+<path d="M651.2,234.2 L653.8,236.9 L658.6,231.1" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="668.8" y="239.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">accepts</text>
+<line x1="28" y1="254.0" x2="732" y2="254.0" stroke="#e9e8e2"/>
+<text x="28.0" y="279.0" font-size="15" font-weight="400" fill="#0b0b0b" text-anchor="start">A million nested arrays</text>
+<circle cx="280.4" cy="274.0" r="8" fill="#0ca30c"/>
+<path d="M276.8,274.2 L279.4,276.9 L284.2,271.1" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="294.4" y="279.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">refuses</text>
+<circle cx="374.0" cy="274.0" r="8" fill="#0ca30c"/>
+<path d="M370.4,274.2 L373.0,276.9 L377.8,271.1" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="388.0" y="279.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">refuses</text>
+<circle cx="467.6" cy="274.0" r="8" fill="#0ca30c"/>
+<path d="M464.0,274.2 L466.6,276.9 L471.4,271.1" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="481.6" y="279.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">accepts</text>
+<circle cx="561.2" cy="274.0" r="8" fill="#0ca30c"/>
+<path d="M557.6,274.2 L560.2,276.9 L565.0,271.1" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="575.2" y="279.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">refuses</text>
+<circle cx="654.8" cy="274.0" r="8" fill="#d03b3b"/>
+<path d="M651.9,271.1 L657.7,276.9 M657.7,271.1 L651.9,276.9" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="668.8" y="279.0" font-size="14" font-weight="400" fill="#52514e" text-anchor="start">crashes</text>
+<text x="28.0" y="322.0" font-size="13.5" font-weight="400" fill="#6f6d68" text-anchor="start">All five give RFC 8259's answer on the other 15 cases: commas, numbers, escapes,</text>
+<text x="28.0" y="342.0" font-size="13.5" font-weight="400" fill="#6f6d68" text-anchor="start">control characters, trailing bytes and more.</text>
+</svg>

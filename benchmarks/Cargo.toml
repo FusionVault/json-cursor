@@ -1,0 +1,31 @@
+# Speed and strictness of json-cursor against other Rust JSON parsers, on the same messages. Not
+# published, and a workspace of its own (the empty `[workspace]` table), so none of these crates ever
+# reach json-cursor's own dependency tree, lockfile or MSRV check. The results are in the crate's
+# README.
+[package]
+name = "json-cursor-benchmarks"
+version = "0.0.0"
+edition = "2021"
+publish = false
+
+[workspace]
+
+# Exact versions, so the published numbers can be reproduced.
+[dependencies]
+json-cursor = { path = ".." }
+serde = "=1.0.229"
+serde_json = "=1.0.154"
+jiter = "=0.19.0"
+sonic-rs = "=0.5.10"
+simd-json = "=0.19.0"
+# a thread's CPU time, which leaves out time spent waiting for the core
+libc = "=0.2.191"
+# `profile`: where one parser's time goes, sampled in-process. Build with
+# RUSTFLAGS="-C force-frame-pointers=yes", since its unwinder walks frame pointers.
+pprof = { version = "=0.14.1", features = ["frame-pointer"] }
+
+# As a service built on these parsers would ship.
+[profile.release]
+codegen-units = 1
+lto = "thin"
+debug = "line-tables-only"

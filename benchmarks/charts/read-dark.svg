@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="750" viewBox="0 0 760 750" font-family="system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" role="img" aria-label="Reading every value: json-cursor is fastest on bids (11% ahead of sonic-rs), fastest on events (24% ahead of jiter) and fastest on GeoJSON (5% ahead of sonic-rs)">
+<title>Reading every value: json-cursor is fastest on bids (11% ahead of sonic-rs), fastest on events (24% ahead of jiter) and fastest on GeoJSON (5% ahead of sonic-rs)</title>
+<rect x="0.5" y="0.5" width="759" height="749" rx="10" fill="#1a1a19" stroke="#2c2c2a"/>
+<text x="28.0" y="40.0" font-size="21" font-weight="600" fill="#ffffff" text-anchor="start">Reading every value</text>
+<text x="28.0" y="66.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="start">Time per message. Shorter is faster.</text>
+<text x="28.0" y="114.0" font-size="17" font-weight="600" fill="#ffffff" text-anchor="start">Bids, 248 bytes</text>
+<text x="732.0" y="114.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="end">fastest, 11% ahead of sonic-rs</text>
+<text x="28.0" y="150.0" font-size="15" font-weight="600" fill="#ffffff" text-anchor="start">json-cursor</text>
+<path d="M140.0,136.0 H419.6 A4.0,4.0 0 0 1 423.6,140.0 V150.0 A4.0,4.0 0 0 1 419.6,154.0 H140.0 Z" fill="#3987e5"/>
+<text x="431.6" y="150.0" font-size="15" font-weight="600" fill="#ffffff" text-anchor="start">178 ns</text>
+<text x="28.0" y="180.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="start">jiter</text>
+<path d="M140.0,166.0 H654.0 A4.0,4.0 0 0 1 658.0,170.0 V180.0 A4.0,4.0 0 0 1 654.0,184.0 H140.0 Z" fill="#75746d"/>
+<text x="666.0" y="180.0" font-size="15" font-weight="400" fill="#ffffff" text-anchor="start">325 ns</text>
+<text x="28.0" y="210.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="start">serde_json</text>
+<path d="M140.0,196.0 H593.8 A4.0,4.0 0 0 1 597.8,200.0 V210.0 A4.0,4.0 0 0 1 593.8,214.0 H140.0 Z" fill="#75746d"/>
+<text x="605.8" y="210.0" font-size="15" font-weight="400" fill="#ffffff" text-anchor="start">287 ns</text>
+<text x="28.0" y="240.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="start">simd-json</text>
+<path d="M140.0,226.0 H591.3 A4.0,4.0 0 0 1 595.3,230.0 V240.0 A4.0,4.0 0 0 1 591.3,244.0 H140.0 Z" fill="#75746d"/>
+<text x="603.3" y="240.0" font-size="15" font-weight="400" fill="#ffffff" text-anchor="start">285 ns</text>
+<text x="28.0" y="270.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="start">sonic-rs</text>
+<path d="M140.0,256.0 H453.7 A4.0,4.0 0 0 1 457.7,260.0 V270.0 A4.0,4.0 0 0 1 453.7,274.0 H140.0 Z" fill="#75746d"/>
+<text x="465.7" y="270.0" font-size="15" font-weight="400" fill="#ffffff" text-anchor="start">199 ns</text>
+<line x1="140" y1="130" x2="140" y2="280" stroke="#383835"/>
+<text x="28.0" y="324.0" font-size="17" font-weight="600" fill="#ffffff" text-anchor="start">Events, 723 bytes</text>
+<text x="732.0" y="324.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="end">fastest, 24% ahead of jiter</text>
+<text x="28.0" y="360.0" font-size="15" font-weight="600" fill="#ffffff" text-anchor="start">json-cursor</text>
+<path d="M140.0,346.0 H373.2 A4.0,4.0 0 0 1 377.2,350.0 V360.0 A4.0,4.0 0 0 1 373.2,364.0 H140.0 Z" fill="#3987e5"/>
+<text x="385.2" y="360.0" font-size="15" font-weight="600" fill="#ffffff" text-anchor="start">282 ns</text>
+<text x="28.0" y="390.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="start">jiter</text>
+<path d="M140.0,376.0 H449.5 A4.0,4.0 0 0 1 453.5,380.0 V390.0 A4.0,4.0 0 0 1 449.5,394.0 H140.0 Z" fill="#75746d"/>
+<text x="461.5" y="390.0" font-size="15" font-weight="400" fill="#ffffff" text-anchor="start">372 ns</text>
+<text x="28.0" y="420.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="start">serde_json</text>
+<path d="M140.0,406.0 H654.0 A4.0,4.0 0 0 1 658.0,410.0 V420.0 A4.0,4.0 0 0 1 654.0,424.0 H140.0 Z" fill="#75746d"/>
+<text x="666.0" y="420.0" font-size="15" font-weight="400" fill="#ffffff" text-anchor="start">615 ns</text>
+<text x="28.0" y="450.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="start">simd-json</text>
+<path d="M140.0,436.0 H508.4 A4.0,4.0 0 0 1 512.4,440.0 V450.0 A4.0,4.0 0 0 1 508.4,454.0 H140.0 Z" fill="#75746d"/>
+<text x="520.4" y="450.0" font-size="15" font-weight="400" fill="#ffffff" text-anchor="start">442 ns</text>
+<text x="28.0" y="480.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="start">sonic-rs</text>
+<path d="M140.0,466.0 H477.5 A4.0,4.0 0 0 1 481.5,470.0 V480.0 A4.0,4.0 0 0 1 477.5,484.0 H140.0 Z" fill="#75746d"/>
+<text x="489.5" y="480.0" font-size="15" font-weight="400" fill="#ffffff" text-anchor="start">405 ns</text>
+<line x1="140" y1="340" x2="140" y2="490" stroke="#383835"/>
+<text x="28.0" y="534.0" font-size="17" font-weight="600" fill="#ffffff" text-anchor="start">GeoJSON, 3,246 bytes</text>
+<text x="732.0" y="534.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="end">fastest, 5% ahead of sonic-rs</text>
+<text x="28.0" y="570.0" font-size="15" font-weight="600" fill="#ffffff" text-anchor="start">json-cursor</text>
+<path d="M140.0,556.0 H483.7 A4.0,4.0 0 0 1 487.7,560.0 V570.0 A4.0,4.0 0 0 1 483.7,574.0 H140.0 Z" fill="#3987e5"/>
+<text x="495.7" y="570.0" font-size="15" font-weight="600" fill="#ffffff" text-anchor="start">4.16 µs</text>
+<text x="28.0" y="600.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="start">jiter</text>
+<path d="M140.0,586.0 H654.0 A4.0,4.0 0 0 1 658.0,590.0 V600.0 A4.0,4.0 0 0 1 654.0,604.0 H140.0 Z" fill="#75746d"/>
+<text x="666.0" y="600.0" font-size="15" font-weight="400" fill="#ffffff" text-anchor="start">6.20 µs</text>
+<text x="28.0" y="630.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="start">serde_json</text>
+<path d="M140.0,616.0 H607.4 A4.0,4.0 0 0 1 611.4,620.0 V630.0 A4.0,4.0 0 0 1 607.4,634.0 H140.0 Z" fill="#75746d"/>
+<text x="619.4" y="630.0" font-size="15" font-weight="400" fill="#ffffff" text-anchor="start">5.64 µs</text>
+<text x="28.0" y="660.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="start">simd-json</text>
+<path d="M140.0,646.0 H626.3 A4.0,4.0 0 0 1 630.3,650.0 V660.0 A4.0,4.0 0 0 1 626.3,664.0 H140.0 Z" fill="#75746d"/>
+<text x="638.3" y="660.0" font-size="15" font-weight="400" fill="#ffffff" text-anchor="start">5.87 µs</text>
+<text x="28.0" y="690.0" font-size="15" font-weight="400" fill="#c3c2b7" text-anchor="start">sonic-rs</text>
+<path d="M140.0,676.0 H502.4 A4.0,4.0 0 0 1 506.4,680.0 V690.0 A4.0,4.0 0 0 1 502.4,694.0 H140.0 Z" fill="#75746d"/>
+<text x="514.4" y="690.0" font-size="15" font-weight="400" fill="#ffffff" text-anchor="start">4.38 µs</text>
+<line x1="140" y1="550" x2="140" y2="700" stroke="#383835"/>
+<text x="28.0" y="728.0" font-size="13.5" font-weight="400" fill="#9b9a93" text-anchor="start">Each parser visits every key and value, as a decoder does.</text>
+</svg>

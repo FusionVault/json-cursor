@@ -1,0 +1,34 @@
+shape,bytes_per_message,job,parser,ns_per_message,min,max
+bids,248,read every value,json-cursor,177.7,177.3,177.9
+bids,248,read every value,jiter,324.6,323.9,325.6
+bids,248,read every value,serde_json,286.9,285.8,290.3
+bids,248,read every value,sonic-rs,199.1,198.6,200.0
+bids,248,read every value,simd-json,285.3,284.4,285.5
+bids,248,read every value,serde_json Value,714.5,712.5,716.2
+bids,248,validate,json-cursor,110.9,109.8,114.0
+bids,248,validate,jiter,177.3,176.9,181.1
+bids,248,validate,serde_json,153.2,152.9,157.1
+bids,248,validate,sonic-rs,173.0,172.6,173.8
+bids,248,validate,simd-json,275.0,274.4,276.2
+events,723,read every value,json-cursor,281.6,280.4,283.4
+events,723,read every value,jiter,372.1,370.5,373.2
+events,723,read every value,serde_json,614.9,587.1,618.5
+events,723,read every value,sonic-rs,405.4,378.8,420.3
+events,723,read every value,simd-json,442.1,438.5,447.4
+events,723,read every value,serde_json Value,1101.1,1088.5,1162.8
+events,723,validate,json-cursor,203.3,202.3,205.3
+events,723,validate,jiter,200.6,199.5,202.9
+events,723,validate,serde_json,263.0,262.0,264.1
+events,723,validate,sonic-rs,223.9,222.3,225.0
+events,723,validate,simd-json,430.4,428.8,435.2
+features,3246,read every value,json-cursor,4160.3,4145.8,4186.0
+features,3246,read every value,jiter,6198.0,6175.3,6227.5
+features,3246,read every value,serde_json,5640.6,5607.0,5666.9
+features,3246,read every value,sonic-rs,4383.6,4361.8,4447.9
+features,3246,read every value,simd-json,5866.0,5847.6,5887.4
+features,3246,read every value,serde_json Value,15461.7,15386.4,15544.2
+features,3246,validate,json-cursor,2119.3,2090.7,2156.5
+features,3246,validate,jiter,3043.7,3020.3,3155.2
+features,3246,validate,serde_json,2725.1,2695.2,2762.5
+features,3246,validate,sonic-rs,2830.9,2814.5,2847.6
+features,3246,validate,simd-json,5400.8,5385.8,5428.2

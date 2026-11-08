@@ -1,0 +1,30 @@
+# json-cursor — a strict JSON pull cursor over bytes: each key and value in order, strings borrowed
+# when they have no escapes, and every number's exact text. No dependencies, no unsafe code, no_std.
+[package]
+name = "json-cursor"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.85"
+license = "Apache-2.0"
+description = "A strict JSON pull cursor over bytes: each key and value in order, strings borrowed when they have no escapes, and every number's exact text, with every byte checked against RFC 8259. No dependencies, no unsafe code, no_std."
+repository = "https://github.com/FusionVault/json-cursor"
+documentation = "https://docs.rs/json-cursor"
+readme = "README.md"
+keywords = ["json", "parser", "tokenizer", "zero-copy", "no-std"]
+categories = ["parser-implementations", "encoding", "no-std"]
+exclude = [".github/", ".gitignore", "rustfmt.toml"]
+
+[dependencies]
+
+[dev-dependencies]
+# the oracle the differential test holds the cursor to
+serde_json = "1"
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+
+[profile.dev]
+debug = "line-tables-only"

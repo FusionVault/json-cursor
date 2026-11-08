@@ -1,0 +1,86 @@
+# CI for json-cursor. A zero-dependency no_std crate: fmt, clippy, test, docs, a publish dry-run, a
+# build for a microcontroller with no standard library, a check that the declared rust-version builds
+# it, and a CHANGELOG line for every change to src/.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  rust:
+    name: rust · fmt · clippy · test · doc · publish --dry-run
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy, rustfmt
+      - uses: Swatinem/rust-cache@v2
+      - name: fmt
+        run: cargo fmt --check
+      - name: clippy
+        run: cargo clippy --all-targets -- -D warnings
+      - name: test
+        run: cargo test
+      - name: test, release, with more random cases
+        run: cargo test --release
+        env:
+          JSON_CURSOR_CASES: "2000000"
+      - name: doc
+        run: cargo doc --no-deps
+        env:
+          RUSTDOCFLAGS: -D warnings
+      - name: publish dry-run
+        run: cargo publish --dry-run
+
+  # Without an operating system: an Arm Cortex-M4F target has no standard library, so this fails if
+  # the crate needs std. It needs `alloc`, for the strings whose escapes it decodes.
+  no_std:
+    name: no_std · builds for a microcontroller
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: thumbv7em-none-eabihf
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo build --target thumbv7em-none-eabihf
+
+  msrv:
+    name: msrv · the declared rust-version builds
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: read rust-version
+        id: msrv
+        run: echo "version=$(grep -m1 '^rust-version' Cargo.toml | cut -d'"' -f2)" >> "$GITHUB_OUTPUT"
+      - uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: ${{ steps.msrv.outputs.version }}
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo check --all-targets
+
+  # Docs are part of every change: a pull request that touches the library must say what changed in
+  # CHANGELOG.md, and update the README and API docs where users will see it.
+  changelog:
+    name: docs · CHANGELOG updated with code changes
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: src/ changes need a CHANGELOG.md line
+        env:
+          BASE: ${{ github.base_ref }}
+        run: |
+          changed=$(git diff --name-only "origin/$BASE...HEAD")
+          if echo "$changed" | grep -q '^src/' && ! echo "$changed" | grep -qx 'CHANGELOG.md'; then
+            echo "::error::src/ changed but CHANGELOG.md did not. Add a line, and update the README and docs where users will see the change."
+            exit 1
+          fi

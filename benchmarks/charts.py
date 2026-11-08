@@ -16,8 +16,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RESULTS = os.path.join(HERE, "results")
 CHARTS = os.path.join(HERE, "charts")
 README = os.path.join(HERE, "..", "README.md")
-# The README is also the crate's docs, where only an absolute address reaches a chart.
-RAW = "https://github.com/FusionVault/json-cursor/raw/main/benchmarks/charts/"
+# Where the README finds the charts: relative, so they show on every branch.
+RAW = "benchmarks/charts/"
 
 # The same palette as the other FusionVault crates' charts.
 THEMES = {

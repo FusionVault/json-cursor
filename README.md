@@ -185,13 +185,13 @@ We raced json-cursor against four popular Rust JSON parsers, on three kinds of m
 - **GeoJSON**, 3,246 bytes: a polygon of 120 points, numbers almost all the way.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/FusionVault/json-cursor/raw/main/benchmarks/charts/read-dark.svg">
-  <img alt="Reading every value: json-cursor is fastest on bids (11% ahead of sonic-rs), fastest on events (24% ahead of jiter) and fastest on GeoJSON (5% ahead of sonic-rs)" src="https://github.com/FusionVault/json-cursor/raw/main/benchmarks/charts/read-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="benchmarks/charts/read-dark.svg">
+  <img alt="Reading every value: json-cursor is fastest on bids (11% ahead of sonic-rs), fastest on events (24% ahead of jiter) and fastest on GeoJSON (5% ahead of sonic-rs)" src="benchmarks/charts/read-light.svg">
 </picture>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/FusionVault/json-cursor/raw/main/benchmarks/charts/validate-dark.svg">
-  <img alt="Validating: json-cursor is fastest on bids (28% ahead of serde_json), level with jiter on events and fastest on GeoJSON (22% ahead of serde_json)" src="https://github.com/FusionVault/json-cursor/raw/main/benchmarks/charts/validate-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="benchmarks/charts/validate-dark.svg">
+  <img alt="Validating: json-cursor is fastest on bids (28% ahead of serde_json), level with jiter on events and fastest on GeoJSON (22% ahead of serde_json)" src="benchmarks/charts/validate-light.svg">
 </picture>
 
 json-cursor is the fastest at reading every value, on all three kinds of message. It is also the
@@ -259,8 +259,8 @@ python3 charts.py
 ## Accuracy
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://github.com/FusionVault/json-cursor/raw/main/benchmarks/charts/strict-dark.svg">
-  <img alt="Strictness: json-cursor gives RFC 8259's answer on all 26 cases; jiter does not on 5; serde_json does not on 5; simd-json does not on 2; sonic-rs does not on 1" src="https://github.com/FusionVault/json-cursor/raw/main/benchmarks/charts/strict-light.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="benchmarks/charts/strict-dark.svg">
+  <img alt="Strictness: json-cursor gives RFC 8259's answer on all 26 cases; jiter does not on 5; serde_json does not on 5; simd-json does not on 2; sonic-rs does not on 1" src="benchmarks/charts/strict-light.svg">
 </picture>
 
 We gave each parser 26 tricky messages. RFC 8259 decides 22 of them, and json-cursor answered all

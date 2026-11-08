@@ -1,7 +1,44 @@
+//! Read JSON one value at a time: fast, strict, and with every number exact.
+//!
+//! A [`Cursor`] walks through a JSON document from start to end. You ask for the next key, string
+//! or number, and it hands it to you straight from your bytes, so you can build your own types
+//! with no tree in between.
+//!
+//! ```
+//! use json_cursor::Cursor;
+//!
+//! let mut cursor = Cursor::new(r#"{"name": "Ada", "born": 1815, "languages": ["English"]}"#);
+//! let mut buf = String::new(); // used only when a key or string has escapes
+//!
+//! let mut next = cursor.first_key(&mut buf)?;
+//! while let Some(key) = next {
+//!     match key {
+//!         "name" => assert_eq!(cursor.string(&mut buf)?, "Ada"),
+//!         "born" => assert_eq!(cursor.number()?.as_i64(), Some(1815)),
+//!         _ => cursor.skip()?, // anything else is checked, then passed over
+//!     }
+//!     next = cursor.next_key(&mut buf)?;
+//! }
+//! cursor.finish()?; // only whitespace may follow
+//! # Ok::<(), json_cursor::Error>(())
+//! ```
+//!
+//! - [`Cursor`] reads a document one value at a time.
+//! - [`Number`] keeps a number's text exactly, and gives its value as an `i64` or an `f64`.
+//! - [`validate`] checks a whole document in one call.
+//! - [`Error`] says what went wrong, and at which byte.
+//!
+//! The [README](https://github.com/FusionVault/json-cursor) has a guide, and the benchmarks against
+//! other parsers.
+
 #![no_std]
-#![doc = include_str!("../README.md")]
 
 extern crate alloc;
+
+/// Every Rust code block in the README is compiled and run as a doctest.
+#[cfg(doctest)]
+#[doc = include_str!("../README.md")]
+pub struct ReadmeDoctests;
 
 mod cursor;
 mod error;

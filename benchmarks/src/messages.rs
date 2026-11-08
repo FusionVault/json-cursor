@@ -2,6 +2,41 @@
 
 use std::fmt::Write as _;
 
+use crate::rng::Rng;
+
+/// A kind of message: its name, how to make the `i`th one, and how many a run reads.
+#[derive(Clone, Copy)]
+pub(crate) struct Shape {
+    pub(crate) name: &'static str,
+    make: fn(usize) -> String,
+    count: usize,
+}
+
+impl Shape {
+    /// Every message a run reads.
+    pub(crate) fn messages(&self) -> Vec<Vec<u8>> {
+        (0..self.count).map(|i| (self.make)(i).into_bytes()).collect()
+    }
+}
+
+pub(crate) const SHAPES: [Shape; 3] = [
+    Shape {
+        name: "bids",
+        make: bid,
+        count: 200_000,
+    },
+    Shape {
+        name: "events",
+        make: event,
+        count: 50_000,
+    },
+    Shape {
+        name: "features",
+        make: feature,
+        count: 10_000,
+    },
+];
+
 /// A Nexmark-like bid, about 250 bytes: integers, a timestamp, short text.
 fn bid(i: usize) -> String {
     format!(
@@ -10,15 +45,11 @@ fn bid(i: usize) -> String {
     )
 }
 
+/// `n` hex digits, the same for the same `seed`.
 fn hex(seed: usize, n: usize) -> String {
-    let mut x = seed as u64 ^ 0x9E37_79B9_7F4A_7C15;
+    let mut rng = Rng(seed as u64 ^ 0x9E37_79B9_7F4A_7C15);
     (0..n)
-        .map(|_| {
-            x ^= x << 13;
-            x ^= x >> 7;
-            x ^= x << 17;
-            char::from(b"0123456789abcdef"[(x % 16) as usize])
-        })
+        .map(|_| char::from(b"0123456789abcdef"[(rng.next() % 16) as usize]))
         .collect()
 }
 
@@ -55,11 +86,3 @@ fn feature(i: usize) -> String {
         i % 400
     )
 }
-
-pub(crate) type Shape = (&'static str, fn(usize) -> String, usize);
-
-pub(crate) const SHAPES: [Shape; 3] = [
-    ("bids", bid, 200_000),
-    ("events", event, 50_000),
-    ("features", feature, 10_000),
-];

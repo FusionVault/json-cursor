@@ -20,6 +20,7 @@ mod exact;
 mod messages;
 mod parsers;
 mod profile;
+mod rng;
 mod speed;
 mod strict;
 mod walk;

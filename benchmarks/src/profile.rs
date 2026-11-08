@@ -8,8 +8,7 @@ use crate::parsers::{run, Bufs, Job};
 /// Where one parser's time goes on one shape, sampled 1,999 times a second: the leaf functions
 /// (inlined ones too, from the line tables), heaviest first.
 pub(crate) fn profile(shape: &str, parser: &str, job: Job) {
-    let (_, make, n) = SHAPES.iter().find(|s| s.0 == shape).copied().expect("a shape");
-    let msgs: Vec<Vec<u8>> = (0..n).map(|i| make(i).into_bytes()).collect();
+    let msgs = SHAPES.iter().find(|s| s.name == shape).expect("a shape").messages();
     let mut b = Bufs::default();
     let guard = pprof::ProfilerGuardBuilder::default().frequency(1999).build().unwrap();
     let start = std::time::Instant::now();

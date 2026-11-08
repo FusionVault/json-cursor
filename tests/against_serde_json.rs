@@ -8,6 +8,9 @@ use std::fmt::Write as _;
 use json_cursor::{validate, Cursor, Kind};
 use serde_json::{Number, Value};
 
+mod common;
+use common::Rng;
+
 /// A value as the cursor reads it: a number keeps its text.
 #[derive(Debug)]
 enum Tree {
@@ -64,26 +67,6 @@ fn same(ours: &Tree, theirs: &Value) -> bool {
             a.len() == b.len() && a.iter().all(|(k, v)| b.get(k).is_some_and(|w| same(v, w)))
         }
         _ => false,
-    }
-}
-
-/// xorshift64: the same cases on every run.
-struct Rng(u64);
-
-impl Rng {
-    fn next(&mut self) -> u64 {
-        let mut x = self.0;
-        x ^= x << 13;
-        x ^= x >> 7;
-        x ^= x << 17;
-        self.0 = x;
-        x
-    }
-    fn below(&mut self, n: usize) -> usize {
-        (self.next() % n as u64) as usize
-    }
-    fn pick<'t, T>(&mut self, items: &'t [T]) -> &'t T {
-        &items[self.below(items.len())]
     }
 }
 
@@ -250,10 +233,7 @@ fn shown(bytes: &[u8]) -> String {
 
 #[test]
 fn the_cursor_and_serde_json_accept_the_same_inputs_and_read_the_same_values() {
-    let cases: usize = std::env::var("JSON_CURSOR_CASES")
-        .ok()
-        .and_then(|v| v.parse().ok())
-        .unwrap_or(100_000);
+    let cases = common::cases(100_000);
     let mut rng = Rng(0x9E37_79B9_7F4A_7C15);
     let (mut read_ok, mut refused, mut out_of_range) = (0usize, 0usize, 0usize);
     let mut buf = String::new();

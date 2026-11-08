@@ -5,10 +5,8 @@ use core::str;
 
 use crate::number::{self, Number};
 use crate::scan::Scan;
-use crate::text;
+use crate::{skip, text};
 use crate::{Error, ErrorKind};
-
-pub(crate) mod skip;
 
 /// What kind of value is next, from its first byte.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -272,7 +270,7 @@ impl<'a> Cursor<'a> {
     #[inline(always)]
     fn number_at(&mut self) -> Result<Number<'a>, Error> {
         let start = self.scan.at;
-        let (end, parts) = number::scan::<true>(self.scan.bytes, start)?;
+        let (end, parts) = number::read::<true>(self.scan.bytes, start)?;
         self.scan.at = end;
         Ok(Number::new(self.text, start, end, parts))
     }
@@ -283,7 +281,7 @@ impl<'a> Cursor<'a> {
     where
         'a: 's,
     {
-        let (end, borrowed) = text::scan(self.text, self.scan.at, buf)?;
+        let (end, borrowed) = text::read(self.text, self.scan.at, buf)?;
         self.scan.at = end;
         Ok(match borrowed {
             Some(text) => text,

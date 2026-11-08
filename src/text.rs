@@ -2,13 +2,14 @@
 
 use alloc::string::String;
 
+use crate::scan::word;
 use crate::{Error, ErrorKind};
 
 /// At a string's opening quote, at `at` in `text`: reads to its closing quote, checking every byte.
 /// Gives the offset after the closing quote, and the string borrowed from `text` when it has no
 /// escapes, else `None`, once decoded into `out`.
 #[inline(always)]
-pub(crate) fn scan<'a>(text: &'a str, at: usize, out: &mut String) -> Result<(usize, Option<&'a str>), Error> {
+pub(crate) fn read<'a>(text: &'a str, at: usize, out: &mut String) -> Result<(usize, Option<&'a str>), Error> {
     let end = plain_run(text.as_bytes(), at + 1);
     if text.as_bytes().get(end) == Some(&b'"') {
         return Ok((end + 1, Some(slice(text, at + 1, end)?)));
@@ -196,14 +197,6 @@ pub(crate) fn plain_run_ascii<const ASCII: bool>(bytes: &[u8], mut at: usize) ->
 
 const ONES: u64 = 0x0101_0101_0101_0101;
 const HIGH: u64 = 0x8080_8080_8080_8080;
-
-/// Eight bytes, the first in the lowest.
-#[inline(always)]
-fn word(bytes: &[u8]) -> u64 {
-    u64::from_le_bytes([
-        bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5], bytes[6], bytes[7],
-    ])
-}
 
 /// The high bit of each byte of `w` that is a quote, a backslash or below 0x20: exact up to the
 /// first such byte, which is all that is read, since a borrow only runs upwards.

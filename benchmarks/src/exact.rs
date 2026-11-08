@@ -2,6 +2,7 @@
 //! reads a long decimal as the nearest double.
 
 use crate::csv;
+use crate::rng::Rng;
 
 /// What each parser gives for three numbers a double cannot hold exactly, as CSV.
 pub(crate) fn exact() {
@@ -62,12 +63,10 @@ pub(crate) fn exact() {
 /// parser reads as the nearest double, which Rust's own parser gives, as CSV.
 pub(crate) fn rounding() {
     const N: usize = 1_000_000;
-    let mut x = 0x9E37_79B9_7F4A_7C15u64;
+    let mut rng = Rng(0x9E37_79B9_7F4A_7C15);
     let texts: Vec<String> = (0..N)
         .map(|_| {
-            x ^= x << 13;
-            x ^= x >> 7;
-            x ^= x << 17;
+            let x = rng.next();
             format!("{}e{}", x % 100_000_000_000_000_000, (x >> 57) as i32 - 64)
         })
         .collect();

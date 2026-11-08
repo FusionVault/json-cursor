@@ -15,11 +15,13 @@ fn thread_cpu_ns() -> u128 {
 /// Every shape, or only those named.
 pub(crate) fn speed(only: &[String]) {
     println!("shape,bytes_per_message,job,parser,ns_per_message,min,max");
-    for (shape, make, n) in SHAPES {
-        if !only.is_empty() && !only.iter().any(|o| o == shape) {
+    for shape in SHAPES {
+        let name = shape.name;
+        if !only.is_empty() && !only.iter().any(|o| o == name) {
             continue;
         }
-        let msgs: Vec<Vec<u8>> = (0..n).map(|i| make(i).into_bytes()).collect();
+        let msgs = shape.messages();
+        let n = msgs.len();
         let bytes = msgs.iter().map(Vec::len).sum::<usize>() / n;
         for (job, job_name) in [(Job::Read, "read every value"), (Job::Validate, "validate")] {
             let parsers: Vec<&str> = PARSERS
@@ -35,7 +37,7 @@ pub(crate) fn speed(only: &[String]) {
                     assert_eq!(
                         run(p, job, m, &mut b),
                         run("json-cursor", job, m, &mut want),
-                        "{p} reads {shape} otherwise"
+                        "{p} reads {name} otherwise"
                     );
                 }
             }
@@ -54,7 +56,7 @@ pub(crate) fn speed(only: &[String]) {
             }
             for (p, mut v) in parsers.iter().zip(rounds) {
                 v.sort_by(f64::total_cmp);
-                println!("{shape},{bytes},{job_name},{p},{:.1},{:.1},{:.1}", v[7], v[0], v[14]);
+                println!("{name},{bytes},{job_name},{p},{:.1},{:.1},{:.1}", v[7], v[0], v[14]);
             }
         }
     }

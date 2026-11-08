@@ -4,6 +4,9 @@
 
 use json_cursor::Cursor;
 
+mod common;
+use common::Rng;
+
 /// The exact whole value of a number's text, the long way: every digit kept, in a `u128`.
 fn whole(text: &str) -> Option<i64> {
     let (negative, body) = match text.strip_prefix('-') {
@@ -140,29 +143,9 @@ fn the_edges_of_the_fast_path_and_of_i64() {
     }
 }
 
-/// xorshift64: the same numbers on every run.
-struct Rng(u64);
-
-impl Rng {
-    fn next(&mut self) -> u64 {
-        let mut x = self.0;
-        x ^= x << 13;
-        x ^= x >> 7;
-        x ^= x << 17;
-        self.0 = x;
-        x
-    }
-    fn below(&mut self, n: u64) -> u64 {
-        self.next() % n
-    }
-}
-
 #[test]
 fn random_numbers_read_as_rusts_parsers_read_them() {
-    let cases: usize = std::env::var("JSON_CURSOR_CASES")
-        .ok()
-        .and_then(|v| v.parse().ok())
-        .unwrap_or(300_000);
+    let cases = common::cases(300_000);
     let mut rng = Rng(0xD1B5_4A32_D192_ED03);
     for _ in 0..cases {
         let mut t = String::new();
@@ -170,7 +153,7 @@ fn random_numbers_read_as_rusts_parsers_read_them() {
             t.push('-');
         }
         // integer part: 1 to 25 digits, so both sides of 19 digits and of 2^53 are crossed
-        let int_digits = 1 + rng.below(25) as usize;
+        let int_digits = 1 + rng.below(25);
         if rng.below(6) == 0 {
             t.push('0');
         } else {

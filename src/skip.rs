@@ -47,7 +47,7 @@ fn skip_from<const UTF8: bool>(bytes: &[u8], mut at: usize, depth_limit: usize) 
                 open.close(depth_limit, &mut deep);
             }
             b'"' => at = text::skip::<UTF8>(bytes, at)?,
-            b'-' | b'0'..=b'9' => at = number::scan::<false>(bytes, at)?.0,
+            b'-' | b'0'..=b'9' => at = number::read::<false>(bytes, at)?.0,
             b't' => at = scan::literal(bytes, at, b"true", "`true`")?,
             b'f' => at = scan::literal(bytes, at, b"false", "`false`")?,
             b'n' => at = scan::literal(bytes, at, b"null", "`null`")?,
@@ -186,6 +186,7 @@ fn shallower(deep: &mut Vec<u64>, limit: usize) -> Open {
 #[cfg(test)]
 mod tests {
     use super::Open;
+    use crate::testing::Rng;
     use alloc::vec::Vec;
 
     /// The bit-stack against a `Vec<bool>`, up past 63 levels and two words beyond, and back down.
@@ -194,15 +195,13 @@ mod tests {
         let mut open = Open::new(usize::MAX);
         let mut deep = Vec::new();
         let mut reference: Vec<bool> = Vec::new();
-        let mut rng = 0x2545_F491_4F6C_DD1Du64;
+        let mut rng = Rng(0x2545_F491_4F6C_DD1D);
         for step in 0..20_000 {
-            rng ^= rng << 13;
-            rng ^= rng >> 7;
-            rng ^= rng << 17;
+            let r = rng.next();
             // climb for a while, then mostly descend, so every depth to about 200 is crossed
             let up = (step / 400) % 2 == 0;
-            if reference.is_empty() || (up && rng % 4 != 0) || (!up && rng % 4 == 0) {
-                let object = rng & 8 == 0;
+            if reference.is_empty() || (up && r % 4 != 0) || (!up && r % 4 == 0) {
+                let object = r & 8 == 0;
                 open.enter(object, usize::MAX, 0, &mut deep).unwrap();
                 reference.push(object);
             } else {

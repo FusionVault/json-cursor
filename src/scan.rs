@@ -88,3 +88,12 @@ pub(crate) fn literal(bytes: &[u8], at: usize, word: &[u8], what: &'static str) 
 pub(crate) fn byte(bytes: &[u8], at: usize) -> Result<u8, Error> {
     bytes.get(at).copied().ok_or(Error::new(ErrorKind::End, at))
 }
+
+/// Eight bytes from the start of `bytes`, the first in the lowest: the word that the bit tricks for
+/// strings and for digits work on.
+#[inline(always)]
+pub(crate) fn word(bytes: &[u8]) -> u64 {
+    u64::from_le_bytes([
+        bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5], bytes[6], bytes[7],
+    ])
+}

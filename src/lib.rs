@@ -40,11 +40,17 @@ extern crate alloc;
 #[doc = include_str!("../README.md")]
 pub struct ReadmeDoctests;
 
-mod cursor;
-mod error;
-mod number;
-mod scan;
-mod text;
+// One part of JSON in each module. `cursor` is the public API, on top of the rest.
+mod cursor; // the cursor: reads values one at a time
+mod error; // what went wrong, and at which byte
+mod number; // numbers: their grammar, their digits, their exact values
+mod scan; // the position in the input: whitespace, literals, eight bytes at a time
+mod skip; // passing over a value of any kind, checked, on a stack of its own
+mod text; // strings: plain runs, escapes, UTF-8
+
+// What the unit tests share.
+#[cfg(test)]
+mod testing;
 
 pub use cursor::{Cursor, Kind, Value, DEFAULT_DEPTH_LIMIT};
 pub use error::{Error, ErrorKind};
@@ -61,6 +67,6 @@ pub use number::Number;
 /// ```
 pub fn validate(bytes: &[u8]) -> Result<(), Error> {
     let mut scan = scan::Scan::new(bytes);
-    cursor::skip::skip::<true>(&mut scan, DEFAULT_DEPTH_LIMIT)?;
+    skip::skip::<true>(&mut scan, DEFAULT_DEPTH_LIMIT)?;
     scan.finish()
 }

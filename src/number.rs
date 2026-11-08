@@ -1,5 +1,6 @@
 //! Numbers: their grammar, read eight digits at a time, and the values they hold exactly.
 
+use crate::scan::word;
 use crate::{Error, ErrorKind};
 
 /// A number as the cursor read it.
@@ -237,7 +238,7 @@ fn saturating_digits(d: &[u8]) -> i64 {
 /// At a number's first byte, `-` or a digit, at `at`: reads it, checking its grammar, and gives
 /// the offset after it. With `VALUE`, also its parts, gathered from the digits as they are read.
 #[inline(always)]
-pub(crate) fn scan<const VALUE: bool>(bytes: &[u8], start: usize) -> Result<(usize, Parts), Error> {
+pub(crate) fn read<const VALUE: bool>(bytes: &[u8], start: usize) -> Result<(usize, Parts), Error> {
     let bad = Error::new(ErrorKind::Number, start);
     let mut p = Parts {
         integer: true,
@@ -314,7 +315,7 @@ const ZEROS: u64 = 0x3030_3030_3030_3030;
 #[inline(always)]
 fn digits<const VALUE: bool>(bytes: &[u8], mut at: usize, value: &mut u64) -> usize {
     while let Some(w) = bytes.get(at..at + 8) {
-        let word = u64::from_le_bytes([w[0], w[1], w[2], w[3], w[4], w[5], w[6], w[7]]);
+        let word = word(w);
         let n = leading_digits(word);
         if n < 8 {
             if !VALUE {
@@ -366,35 +367,31 @@ fn eight_digits(word: u64) -> u64 {
 #[cfg(test)]
 mod tests {
     use super::{eight_digits, leading_digits};
-
-    fn word(bytes: [u8; 8]) -> u64 {
-        u64::from_le_bytes(bytes)
-    }
+    use crate::scan::word;
+    use crate::testing::Rng;
 
     /// Bytes next to the digits, and those whose add carries into the next byte.
     const OTHERS: [u8; 12] = [b'/', b':', b'.', b'e', b'-', b' ', b'"', 0x00, 0x2f, 0x3a, 0xfa, 0xff];
 
     #[test]
     fn leading_digits_counts_to_the_first_byte_that_is_not_one() {
-        let mut rng = 0x853C_49E6_748F_EA9Bu64;
+        let mut rng = Rng(0x853C_49E6_748F_EA9B);
         for n in 0..=8 {
             for &other in &OTHERS {
                 for _ in 0..200 {
                     let mut b = [0u8; 8];
                     for (i, byte) in b.iter_mut().enumerate() {
-                        rng ^= rng << 13;
-                        rng ^= rng >> 7;
-                        rng ^= rng << 17;
+                        let r = rng.next();
                         *byte = if i < n {
-                            b'0' + (rng % 10) as u8
+                            b'0' + (r % 10) as u8
                         } else if i == n {
                             other
                         } else {
                             // anything after the first non-digit, digits included
-                            (rng >> 8) as u8
+                            (r >> 8) as u8
                         };
                     }
-                    assert_eq!(leading_digits(word(b)), n, "{b:?}");
+                    assert_eq!(leading_digits(word(&b)), n, "{b:?}");
                 }
             }
         }
@@ -402,21 +399,19 @@ mod tests {
 
     #[test]
     fn eight_digits_read_in_a_word_have_their_value() {
-        let mut rng = 0x2545_F491_4F6C_DD1Du64;
+        let mut rng = Rng(0x2545_F491_4F6C_DD1D);
         for _ in 0..100_000 {
-            rng ^= rng << 13;
-            rng ^= rng >> 7;
-            rng ^= rng << 17;
+            let r = rng.next();
             let mut b = [0u8; 8];
             let mut value = 0u64;
             for (i, byte) in b.iter_mut().enumerate() {
-                let d = ((rng >> (i * 4)) % 10) as u8;
+                let d = ((r >> (i * 4)) % 10) as u8;
                 *byte = b'0' + d;
                 value = value * 10 + u64::from(d);
             }
-            assert_eq!(eight_digits(word(b)), value, "{b:?}");
+            assert_eq!(eight_digits(word(&b)), value, "{b:?}");
         }
-        assert_eq!(eight_digits(word(*b"99999999")), 99_999_999);
-        assert_eq!(eight_digits(word(*b"00000000")), 0);
+        assert_eq!(eight_digits(word(b"99999999")), 99_999_999);
+        assert_eq!(eight_digits(word(b"00000000")), 0);
     }
 }

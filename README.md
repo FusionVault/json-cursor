@@ -300,6 +300,22 @@ nearest double every time. serde_json missed it on 319,907 of them, by default.
   every time.
 - **CI** checks the oldest supported Rust, 1.85, and a `no_std` build.
 
+## Contributing
+
+Pull requests are welcome. Start at `src/lib.rs`: it lists the modules, one part of JSON in each,
+with `cursor.rs` the public API on top of the rest.
+
+Before you open a pull request, run:
+
+```bash
+cargo fmt
+cargo clippy --all-targets -- -D warnings
+cargo test
+```
+
+`cargo test` runs every test, including the examples in this README. A change to `src/` needs a
+line in `CHANGELOG.md`. To check speed, run the benchmarks as shown under [Speed](#speed).
+
 ## License
 
 Apache-2.0. See [LICENSE](https://github.com/FusionVault/json-cursor/blob/main/LICENSE) and

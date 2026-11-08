@@ -3,7 +3,7 @@
 All notable changes to json-cursor. We use [semantic versioning](https://semver.org), and each
 release is tagged `vX.Y.Z`.
 
-## Unreleased
+## 0.1.0 — 2026-11-08
 
 The first release.
 
